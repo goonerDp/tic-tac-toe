@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { func } from "prop-types";
 import Square from "./Square";
 
 class Board extends Component {
+  static propTypes = {
+    onClick: func
+  };
+
   renderSquare(i) {
     return (
       <Square

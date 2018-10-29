@@ -3,6 +3,7 @@ import Board from "./Board";
 import { connect } from "react-redux";
 import { startNewGame } from "../actions";
 import Stats from "./Stats";
+import { calcWinner } from "../utils";
 
 const INITIAL_GAME_STATE = {
   history: [
@@ -65,11 +66,14 @@ class Game extends Component {
     const { stats } = this.props;
     const history = this.state.history;
     const current = history[this.state.stepNumber];
+    const stepNumber = this.state.stepNumber;
     const winner = calcWinner(current.squares);
-
     let status;
+
     if (winner) {
       status = "Winner: " + winner;
+    } else if (stepNumber === 9) {
+      status = "It's a draw!";
     } else {
       status = "Next player: " + (this.state.xIsNext ? "x" : "o");
     }
@@ -85,38 +89,23 @@ class Game extends Component {
           </button>
         </div>
 
+        <div className="set-status">
+          {status}{" "}
+          {(winner || stepNumber === 9) && (
+            <button
+              onClick={this.startNewGame(winner)}
+              className="btn--new-game"
+            >
+              New game
+            </button>
+          )}
+        </div>
         <Board squares={current.squares} onClick={i => this.handleClick(i)} />
-        <div className="set-status">{status}</div>
-        {winner && (
-          <div>
-            <button onClick={this.startNewGame(winner)}>New game</button>
-          </div>
-        )}
+
         <Stats stats={stats} />
       </Fragment>
     );
   }
-}
-
-function calcWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
 }
 
 export default connect(

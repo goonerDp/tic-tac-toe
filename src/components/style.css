@@ -39,6 +39,7 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .set-status {
@@ -47,4 +48,20 @@
 
 .stats {
   font-size: 18px;
+  margin: 40px 0;
+}
+
+.stats__num {
+  font-weight: bold;
+}
+
+.stats__num--x {
+  color: yellowgreen;
+}
+.stats__num--0 {
+  color: orange;
+}
+
+.btn--new-game {
+  margin-left: 10px;
 }
