@@ -1,0 +1,2 @@
+add winner declar
+add button "start new game" => save stats in reducer => reset game

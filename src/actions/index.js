@@ -1,8 +1,8 @@
-export const actionTypes = { TEST: "TEST" };
+export const actionTypes = { NEW_GAME: "NEW_GAME" };
 
-export const testAction = () => {
+export const startNewGame = winner => {
   return {
-    type: actionTypes.TEST,
-    payload: "test"
+    type: actionTypes.NEW_GAME,
+    payload: winner
   };
 };

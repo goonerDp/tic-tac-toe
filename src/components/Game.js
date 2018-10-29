@@ -1,16 +1,21 @@
 import React, { Component, Fragment } from "react";
 import Board from "./Board";
+import { connect } from "react-redux";
+import { startNewGame } from "../actions";
+import Stats from "./Stats";
+
+const INITIAL_GAME_STATE = {
+  history: [
+    {
+      squares: Array(9).fill(null)
+    }
+  ],
+  xIsNext: true,
+  stepNumber: 0
+};
 
 class Game extends Component {
-  state = {
-    history: [
-      {
-        squares: Array(9).fill(null)
-      }
-    ],
-    xIsNext: true,
-    stepNumber: 0
-  };
+  state = INITIAL_GAME_STATE;
 
   goBack = () => {
     const step = this.state.stepNumber;
@@ -38,7 +43,9 @@ class Game extends Component {
     const current = history[history.length - 1];
     const squares = current.squares.slice();
 
-    if (calcWinner(squares) || squares[i]) return;
+    if (calcWinner(squares) || squares[i]) {
+      return;
+    }
 
     squares[i] = this.state.xIsNext ? "x" : "o";
 
@@ -49,9 +56,23 @@ class Game extends Component {
     });
   }
 
+  startNewGame = winner => () => {
+    this.props.startNewGame(winner);
+    this.setState(INITIAL_GAME_STATE);
+  };
+
   render() {
+    const { stats } = this.props;
     const history = this.state.history;
     const current = history[this.state.stepNumber];
+    const winner = calcWinner(current.squares);
+
+    let status;
+    if (winner) {
+      status = "Winner: " + winner;
+    } else {
+      status = "Next player: " + (this.state.xIsNext ? "x" : "o");
+    }
 
     return (
       <Fragment>
@@ -63,7 +84,15 @@ class Game extends Component {
             Step Forward &rarr;
           </button>
         </div>
+
         <Board squares={current.squares} onClick={i => this.handleClick(i)} />
+        <div className="set-status">{status}</div>
+        {winner && (
+          <div>
+            <button onClick={this.startNewGame(winner)}>New game</button>
+          </div>
+        )}
+        <Stats stats={stats} />
       </Fragment>
     );
   }
@@ -84,10 +113,17 @@ function calcWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      console.log("winner is:", squares[i]);
       return squares[a];
     }
   }
   return null;
 }
-export default Game;
+
+export default connect(
+  state => {
+    return {
+      stats: state.stats
+    };
+  },
+  { startNewGame }
+)(Game);

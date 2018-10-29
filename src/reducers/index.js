@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import test from "./test";
+import stats from "./stats";
 
-export default combineReducers({ test });
+export default combineReducers({ stats });
