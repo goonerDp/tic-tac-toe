@@ -3,7 +3,8 @@ import { actionTypes } from "../actions";
 const INITIAL_STATE = {
   sets: 0,
   x_wins: 0,
-  o_wins: 0
+  o_wins: 0,
+  draws: 0
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -14,7 +15,7 @@ export default function(state = INITIAL_STATE, action) {
       } else if (action.payload === "o") {
         return { ...state, sets: ++state.sets, o_wins: ++state.o_wins };
       }
-      return { ...state, sets: ++state.sets };
+      return { ...state, sets: ++state.sets, draws: ++state.draws };
     default:
       return state;
   }

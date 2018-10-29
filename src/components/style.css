@@ -51,6 +51,9 @@
   margin: 40px 0;
 }
 
+.stats__total {
+  margin-bottom: 5px;
+}
 .stats__num {
   font-weight: bold;
 }
@@ -60,6 +63,9 @@
 }
 .stats__num--0 {
   color: orange;
+}
+.stats__num--draw {
+  color: rebeccapurple;
 }
 
 .btn--new-game {

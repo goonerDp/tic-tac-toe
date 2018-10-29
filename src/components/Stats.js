@@ -1,10 +1,10 @@
 import React from "react";
 import { number, shape } from "prop-types";
 
-const Stats = ({ stats: { sets, x_wins, o_wins } }) => {
+const Stats = ({ stats: { sets, x_wins, o_wins, draws } }) => {
   return (
     <div className="stats">
-      <div>
+      <div className="stats__total">
         Sets played: <span className="stats__num">{sets}</span>
       </div>
       <div>
@@ -14,6 +14,9 @@ const Stats = ({ stats: { sets, x_wins, o_wins } }) => {
       <div>
         Player 2 wins:{" "}
         <span className="stats__num stats__num--0">{o_wins}</span>
+      </div>
+      <div>
+        Draws: <span className="stats__num stats__num--draw">{draws}</span>
       </div>
     </div>
   );
