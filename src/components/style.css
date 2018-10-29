@@ -1,0 +1,42 @@
+.container {
+  padding: 15px;
+  max-width: 250px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.board {
+  display: inline-block;
+}
+.board__row {
+  display: flex;
+}
+
+.square {
+  background-color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+  border: 1px solid black;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  outline: none;
+}
+
+.history-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.history-nav__btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
