@@ -5,7 +5,7 @@ import { startNewGame } from "../actions";
 import Stats from "./Stats";
 import { calcWinner } from "../utils";
 
-const INITIAL_GAME_STATE = {
+export const INITIAL_GAME_STATE = {
   history: [
     {
       squares: Array(9).fill(null)

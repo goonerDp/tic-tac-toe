@@ -10,6 +10,7 @@ class Board extends Component {
   renderSquare(i) {
     return (
       <Square
+        id={"test-id" + i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
