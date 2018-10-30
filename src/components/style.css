@@ -46,8 +46,13 @@ body {
   padding: 0;
   border: none;
   background-color: transparent;
-  cursor: pointer;
   font-size: 22px;
+  opacity: 0.1;
+  outline: none;
+}
+.history-nav__btn.active {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .set-status {

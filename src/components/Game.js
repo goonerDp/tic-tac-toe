@@ -17,7 +17,6 @@ export const INITIAL_GAME_STATE = {
 
 class Game extends Component {
   state = INITIAL_GAME_STATE;
-
   goBack = () => {
     const step = this.state.stepNumber;
     if (step > 0) {
@@ -64,29 +63,38 @@ class Game extends Component {
 
   render() {
     const { stats } = this.props;
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const stepNumber = this.state.stepNumber;
+    const { history, stepNumber } = this.state;
+    const current = history[stepNumber];
     const winner = calcWinner(current.squares, true);
     let status, winnerLine;
 
     if (winner) {
       status = "Winner: " + winner.winner;
       winnerLine = winner.line;
-      console.log(winner);
     } else if (stepNumber === 9) {
       status = "It's a draw!";
     } else {
       status = "Next player: " + (this.state.xIsNext ? "x" : "o");
     }
-
     return (
       <Fragment>
         <div className="history-nav">
-          <button className="history-nav__btn" onClick={this.goBack}>
+          <button
+            className={
+              stepNumber > 0 ? "history-nav__btn active" : "history-nav__btn"
+            }
+            onClick={this.goBack}
+          >
             &larr; Step Back
           </button>
-          <button className="history-nav__btn" onClick={this.goForward}>
+          <button
+            className={
+              stepNumber < history.length - 1
+                ? "history-nav__btn active"
+                : "history-nav__btn"
+            }
+            onClick={this.goForward}
+          >
             Step Forward &rarr;
           </button>
         </div>
