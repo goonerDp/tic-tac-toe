@@ -1,9 +1,13 @@
 import React from "react";
 import { string, func } from "prop-types";
 
-const Square = ({ value, onClick, id }) => {
+const Square = ({ value, onClick, id, className }) => {
   return (
-    <button className="square" onClick={onClick} id={id}>
+    <button
+      className={["square", className].join(" ")}
+      onClick={onClick}
+      id={id}
+    >
       {value}
     </button>
   );

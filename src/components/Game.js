@@ -67,11 +67,13 @@ class Game extends Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const stepNumber = this.state.stepNumber;
-    const winner = calcWinner(current.squares);
-    let status;
+    const winner = calcWinner(current.squares, true);
+    let status, winnerLine;
 
     if (winner) {
-      status = "Winner: " + winner;
+      status = "Winner: " + winner.winner;
+      winnerLine = winner.line;
+      console.log(winner);
     } else if (stepNumber === 9) {
       status = "It's a draw!";
     } else {
@@ -90,7 +92,7 @@ class Game extends Component {
         </div>
 
         <div className="set-status">
-          {status}{" "}
+          {status}
           {(winner || stepNumber === 9) && (
             <button
               onClick={this.startNewGame(winner)}
@@ -100,7 +102,11 @@ class Game extends Component {
             </button>
           )}
         </div>
-        <Board squares={current.squares} onClick={i => this.handleClick(i)} />
+        <Board
+          squares={current.squares}
+          onClick={i => this.handleClick(i)}
+          winnerLine={winnerLine}
+        />
 
         <Stats stats={stats} />
       </Fragment>

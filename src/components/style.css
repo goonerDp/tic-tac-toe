@@ -31,6 +31,10 @@ body {
   outline: none;
 }
 
+.square.winner-square {
+  background-color: gainsboro;
+}
+
 .history-nav {
   display: flex;
   justify-content: space-between;

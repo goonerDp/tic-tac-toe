@@ -1,18 +1,23 @@
 import React, { Component } from "react";
-import { func } from "prop-types";
+import { func, array } from "prop-types";
 import Square from "./Square";
 
 class Board extends Component {
   static propTypes = {
-    onClick: func
+    onClick: func,
+    winnerLine: array
   };
 
   renderSquare(i) {
+    const { winnerLine } = this.props;
+
     return (
       <Square
-        id={"test-id" + i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
+        className={
+          winnerLine && winnerLine.indexOf(i) !== -1 && "winner-square"
+        }
       />
     );
   }
