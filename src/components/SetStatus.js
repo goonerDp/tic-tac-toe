@@ -2,11 +2,10 @@ import React from "react";
 import { func, number, bool, string, object, oneOfType } from "prop-types";
 
 const SetStatus = ({ winner, stepNumber, xIsNext, startNewGame }) => {
-  let status, winnerLine;
+  let status;
 
   if (winner) {
     status = "Winner: " + winner.winner;
-    winnerLine = winner.line;
   } else if (stepNumber === 9) {
     status = "It's a draw!";
   } else {

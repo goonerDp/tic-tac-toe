@@ -4,6 +4,8 @@ import Root from "../../Root";
 import Game, { INITIAL_GAME_STATE } from "../Game";
 import Board from "../Board";
 import Stats from "../Stats";
+import SetNav from "../SetNav";
+import SetStatus from "../SetStatus";
 
 let wrapper;
 
@@ -20,10 +22,12 @@ afterEach(() => {
 });
 
 describe("Game", () => {
-  it("should render an Game component with Board and Stats components", () => {
+  it("should render an Game component with Board, Stats, SetNav, SetStatus components", () => {
     expect(wrapper.find(Game).length).toBe(1);
     expect(wrapper.find(Board).length).toBe(1);
     expect(wrapper.find(Stats).length).toBe(1);
+    expect(wrapper.find(SetNav).length).toBe(1);
+    expect(wrapper.find(SetStatus).length).toBe(1);
   });
 
   it("player x is first", () => {

@@ -1,6 +1,6 @@
 import { actionTypes } from "../actions";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   sets: 0,
   x_wins: 0,
   o_wins: 0,
