@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
 import Board from "./Board";
-import { connect } from "react-redux";
-import { startNewGame } from "../actions";
 import Stats from "./Stats";
+import SetStatus from "./SetStatus";
+import SetNav from "./SetNav";
+import { connect } from "react-redux";
 import { calcWinner } from "../utils";
+import { startNewGame } from "../actions";
 
 export const INITIAL_GAME_STATE = {
   history: [
@@ -63,53 +65,27 @@ class Game extends Component {
 
   render() {
     const { stats } = this.props;
-    const { history, stepNumber } = this.state;
+    const { history, stepNumber, xIsNext } = this.state;
     const current = history[stepNumber];
     const winner = calcWinner(current.squares, true);
-    let status, winnerLine;
-
+    let winnerLine;
     if (winner) {
-      status = "Winner: " + winner.winner;
       winnerLine = winner.line;
-    } else if (stepNumber === 9) {
-      status = "It's a draw!";
-    } else {
-      status = "Next player: " + (this.state.xIsNext ? "x" : "o");
     }
     return (
       <Fragment>
-        <div className="history-nav">
-          <button
-            className={
-              stepNumber > 0 ? "history-nav__btn active" : "history-nav__btn"
-            }
-            onClick={this.goBack}
-          >
-            &larr; Step Back
-          </button>
-          <button
-            className={
-              stepNumber < history.length - 1
-                ? "history-nav__btn active"
-                : "history-nav__btn"
-            }
-            onClick={this.goForward}
-          >
-            Step Forward &rarr;
-          </button>
-        </div>
-
-        <div className="set-status">
-          {status}
-          {(winner || stepNumber === 9) && (
-            <button
-              onClick={this.startNewGame(winner)}
-              className="btn--new-game"
-            >
-              New game
-            </button>
-          )}
-        </div>
+        <SetNav
+          stepNumber={stepNumber}
+          history={history}
+          goBack={this.goBack}
+          goForward={this.goForward}
+        />
+        <SetStatus
+          winner={winner}
+          xIsNext={xIsNext}
+          stepNumber={stepNumber}
+          startNewGame={this.startNewGame}
+        />
         <Board
           squares={current.squares}
           onClick={i => this.handleClick(i)}

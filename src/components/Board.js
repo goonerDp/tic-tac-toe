@@ -1,23 +1,21 @@
 import React, { Component } from "react";
-import { func, array } from "prop-types";
+import { func, array, arrayOf, string } from "prop-types";
 import Square from "./Square";
 
 class Board extends Component {
   static propTypes = {
-    onClick: func,
-    winnerLine: array
+    winnerLine: array,
+    squares: arrayOf(string).isRequired,
+    onClick: func.isRequired
   };
 
   renderSquare(i) {
-    const { winnerLine } = this.props;
-
+    const { winnerLine, squares, onClick } = this.props;
     return (
       <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-        className={
-          winnerLine && winnerLine.indexOf(i) !== -1 && "winner-square"
-        }
+        value={squares[i]}
+        onClick={() => onClick(i)}
+        winner={winnerLine && winnerLine.indexOf(i) !== -1}
       />
     );
   }

@@ -1,10 +1,10 @@
 import React from "react";
-import { string, func } from "prop-types";
+import { string, bool, func } from "prop-types";
 
-const Square = ({ value, onClick, id, className }) => {
+const Square = ({ value, onClick, id, winner }) => {
   return (
     <button
-      className={["square", className].join(" ")}
+      className={winner ? "square square--winner" : "square"}
       onClick={onClick}
       id={id}
     >
@@ -16,7 +16,8 @@ const Square = ({ value, onClick, id, className }) => {
 Square.propTypes = {
   value: string,
   id: string,
-  onClick: func
+  winner: bool,
+  onClick: func.isRequired
 };
 
 export default Square;

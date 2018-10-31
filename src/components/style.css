@@ -31,7 +31,7 @@ body {
   outline: none;
 }
 
-.square.winner-square {
+.square.square--winner {
   background-color: gainsboro;
 }
 
