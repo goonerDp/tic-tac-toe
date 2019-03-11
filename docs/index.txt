@@ -1,4 +1,0 @@
-Jest запустит тесты:
-- папка "__tests__"
-- файл "App.test.js"
-- файл "App.spec.js"
