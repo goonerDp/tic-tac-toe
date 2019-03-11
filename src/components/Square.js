@@ -17,7 +17,7 @@ Square.propTypes = {
   value: string,
   id: string,
   winner: bool,
-  onClick: func.isRequired
+  onClick: func
 };
 
 export default Square;
