@@ -26,3 +26,5 @@ npm test
 ## Build with Travis
 
 After code is pushed into Master brunch, Travis is kicks in: runs tests, if tests are passed, makes deploy to GitHub pages.
+
+[![Build Status](https://travis-ci.com/goonerDp/tic-tac-toe.svg?branch=master)](https://travis-ci.com/goonerDp/tic-tac-toe)
