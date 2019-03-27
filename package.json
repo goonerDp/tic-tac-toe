@@ -1,9 +1,13 @@
 {
   "name": "tic-tac-toe",
+  "author": "goonerDp",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://goonerDp.github.io/tic-tac-toe/",
+  "main": "public/electron.js",
   "dependencies": {
+    "cross-env": "^5.2.0",
+    "electron-is-dev": "^1.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "react": "^16.6.0",
@@ -13,12 +17,21 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5"
   },
+  "build": {
+    "publish": {
+      "provider": "github"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "react-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "electron-dev": "concurrently \"cross-env BROWSER=none npm run start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-build": "electron-builder",
+    "build": "npm run react-build && npm run electron-build",
+    "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -28,5 +41,12 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "electron": "^4.1.0",
+    "electron-builder": "^20.39.0",
+    "typescript": "^3.3.3333",
+    "wait-on": "^3.2.0"
+  }
 }
